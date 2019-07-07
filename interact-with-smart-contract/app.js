@@ -94,6 +94,7 @@ const contractABI = [{
 
 const contract = new web3.eth.Contract(contractABI, contractAddress)
 
+// Write data to the smart contract
 web3.eth.getTransactionCount(account1, (err, txCount) => {
 
     const txObject = {
@@ -117,9 +118,12 @@ web3.eth.getTransactionCount(account1, (err, txCount) => {
     })
 })
 
-contract.methods.checkCertStatus().call((err, status) => {
-    console.log({
-        err,
-        status
-    })
+// Check the certificate status by calling the `checkCertStatus()` function
+contract.methods.checkCertStatus().call().then((status) => {
+    console.log(status)
+})
+
+// Read the uploaded CSR file
+contract.methods.csrFile().call().then((result) => {
+    console.log(result)
 })

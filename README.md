@@ -10,8 +10,16 @@
 
 1. When exporting the private keys to be environment variables, make sure to remove `0x`. 
 
-`$ export PRIVATE_KEY="ABCDEEFG"` instead of `$ export PRIVATE_KEY="0xABCDEFG"`
+    `$ export PRIVATE_KEY="ABCDEEFG"` instead of `$ export PRIVATE_KEY="0xABCDEFG"`
 
 2. When loading the private keys from env, be sure to specify the keys to be in hexadecimal values, otherwise an `private key length is invalid` error will show up.
 
-`const privateKey1 = Buffer.from(process.env.PRIVATE_KEY_1, 'hex')` instead of `const privateKey1 = Buffer.from(process.env.PRIVATE_KEY_1)`
+    `const privateKey1 = Buffer.from(process.env.PRIVATE_KEY_1, 'hex')` instead of `const privateKey1 = Buffer.from(process.env.PRIVATE_KEY_1)`
+
+## Interact with Smart Contract
+
+### Notes
+
+1. In order to success read data from smart contracts (either public function or public variables), make sure to use the callback promise **then()**. [ref](https://web3js.readthedocs.io/en/1.0/callbacks-promises-events.html)
+
+    `contract.methods.isRevoke().call().then((result) => {console.log(result)});` instead of `contract.methods.isRevoke().call((err, status) => {console.log(status)});`
