@@ -3,7 +3,8 @@ pragma solidity ^0.4.25;
 contract cert {
     string public rootCert;
     string public csrFile;
-    bool public isRevoke = false;   // false: valid certificate
+    string public serverCert;
+    bool public isValid = false;
     
     constructor(string file) public {
         rootCert = file;
@@ -13,18 +14,24 @@ contract cert {
         csrFile = file;
         return true;
     }
+
+    function uploadCert(string file) public returns (bool) {
+        serverCert = file;
+        isValid = true;
+        return true;
+    }
     
     function checkCertStatus() public view returns (string) {
-        if (isRevoke == false) {
+        if (isValid == true) {
             return "Certificate is valid!";
         } else {
-            return "Certificate has been revoked! :(";
+            return "Certificate is invalid!";
         }
     }
     
     function revokeCertificate() public returns (bool) {
-        isRevoke = true;    // no longer valid!
-        rootCert = "XXX";
+        isValid = false;
+        serverCert = "XXX";
         
         return true;
     }

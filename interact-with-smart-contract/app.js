@@ -11,8 +11,7 @@ const account2 = '0xA17884eb89141B41eb815986e26c450B5A8A84FF'
 const privateKey1 = Buffer.from(process.env.PRIVATE_KEY_1, 'hex')
 const privateKey2 = Buffer.from(process.env.PRIVATE_KEY_2, 'hex')
 
-// Get the address by the txHash: `0x98232aa41d5de3ce2236c5f1a67c6696a2157e8313da9b77d230299c9435072f`
-const contractAddress = '0xa973b43c32d45980db41c2043A9051E04095A4f9'
+const contractAddress = "0x506B2CBc26e948931E81764E179f9004EeaFEE2D"
 const contractABI = [{
     "constant": false,
     "inputs": [],
@@ -38,7 +37,18 @@ const contractABI = [{
 }, {
     "constant": true,
     "inputs": [],
-    "name": "isRevoke",
+    "name": "serverCert",
+    "outputs": [{
+        "name": "",
+        "type": "string"
+    }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "isValid",
     "outputs": [{
         "name": "",
         "type": "bool"
@@ -64,6 +74,20 @@ const contractABI = [{
         "type": "string"
     }],
     "name": "uploadCSR",
+    "outputs": [{
+        "name": "",
+        "type": "bool"
+    }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{
+        "name": "file",
+        "type": "string"
+    }],
+    "name": "uploadCert",
     "outputs": [{
         "name": "",
         "type": "bool"
