@@ -23,3 +23,21 @@
 1. In order to success read data from smart contracts (either public function or public variables), make sure to use the callback promise **then()**. [ref](https://web3js.readthedocs.io/en/1.0/callbacks-promises-events.html)
 
     `contract.methods.isRevoke().call().then((result) => {console.log(result)});` instead of `contract.methods.isRevoke().call((err, status) => {console.log(status)});`
+
+## How to get Transaction Status?
+
+1. `getTransactionReceipt` [ref](https://web3js.readthedocs.io/en/1.0/web3-eth.html#gettransactionreceipt)
+
+```javascript
+> var tx_receipt;
+
+> web3.eth.getTransactionReceipt("0x195a2d6b0aa9a54437bb598afa9f6884f18ea8c48e817d1e2a2c8784cfd0e843").then((res) => {tx_receipt = res})
+
+> console.log(tx_receipt["status"])
+true
+```
+
+2. *Event Listener*
+https://ethereum.stackexchange.com/questions/56225/how-to-set-a-timer-in-web3-event-watcher?rq=1
+
+3. Block number timestamp
